@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 96%;
+    --foreground: 217 33% 17%;
+    --card: 0 0% 100%;
+    --card-foreground: 217 33% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 33% 17%;
+    --primary: 217 91% 25%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 94%;
+    --secondary-foreground: 217 33% 17%;
+    --muted: 210 40% 92%;
+    --muted-foreground: 217 15% 45%;
+    --accent: 210 40% 92%;
+    --accent-foreground: 217 33% 17%;
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 88%;
+    --input: 214 32% 88%;
+    --ring: 217 91% 25%;
+    --radius: 0.5rem;
+    --sidebar: 0 0% 100%;
+    --sidebar-foreground: 217 33% 17%;
+    --chart-1: 217 91% 25%;
+    --chart-2: 173 80% 40%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --success: 142 71% 45%;
+    --warning: 38 92% 50%;
+  }
+
+  .dark {
+    --background: 217 33% 6%;
+    --foreground: 210 40% 95%;
+    --card: 217 33% 8%;
+    --card-foreground: 210 40% 95%;
+    --popover: 217 33% 8%;
+    --popover-foreground: 210 40% 95%;
+    --primary: 217 91% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 19% 12%;
+    --secondary-foreground: 210 40% 95%;
+    --muted: 217 19% 12%;
+    --muted-foreground: 217 10% 65%;
+    --accent: 217 19% 12%;
+    --accent-foreground: 210 40% 95%;
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 217 19% 15%;
+    --input: 217 19% 15%;
+    --ring: 217 91% 45%;
+    --sidebar: 217 33% 4%;
+    --sidebar-foreground: 210 40% 95%;
+    --chart-1: 217 91% 55%;
+    --chart-2: 173 80% 60%;
+    --chart-3: 197 37% 44%;
+    --chart-4: 43 74% 76%;
+    --chart-5: 27 87% 77%;
+    --success: 142 71% 55%;
+    --warning: 38 92% 60%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+  
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Inter', 'Poppins', sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    font-variation-settings: normal;
+  }
+  
+  .sidebar {
+    background-color: hsl(var(--sidebar));
+    color: hsl(var(--sidebar-foreground));
+  }
+}
+
+/* Estilos personalizados */
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+.shadow-glow-primary {
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+}
+
+.sidebar {
+  transition: all 0.3s ease;
+}
+
+@layer utilities {
+  .transform-gpu {
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animaciones para WelcomeMessage */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progress-bar {
+  from { 
+    width: 0%; 
+  }
+  to { 
+    width: 100%; 
+  }
+}
+
+@keyframes blob {
+  0%, 100% { 
+    transform: translate(0, 0) scale(1); 
+  }
+  33% { 
+    transform: translate(30px, -50px) scale(1.1); 
+  }
+  66% { 
+    transform: translate(-20px, 20px) scale(0.9); 
+  }
+}
+
+.animate-fade-in-up { 
+  animation: fade-in-up 0.6s ease-out; 
+}
+
+.animate-progress-bar { 
+  animation: progress-bar 3.5s linear; 
+}
+
+.animate-blob { 
+  animation: blob 7s infinite; 
+}
+
+.animation-delay-2000 { 
+  animation-delay: 2s; 
+}
+
+.animation-delay-4000 { 
+  animation-delay: 4s; 
+}
