@@ -19,7 +19,7 @@ const links = [
 export const Logo = () => (
   <div className="flex items-center justify-center w-full">
     <img 
-      src="/Material Tico.png" 
+      src="/constructora.jpg" 
       alt="Logo Empresa" 
       className="h-12 max-w-[140px] object-contain"
     />

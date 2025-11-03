@@ -8,7 +8,7 @@ import { Footer } from '@/components/Footer'
 const Logo = () => (
   <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 mt-2">
     <img 
-      src="/Material Tico.png" 
+      src="/constructora.jpg" 
       alt=" Logo" 
       className="w-full h-full object-contain"
     />
@@ -53,7 +53,7 @@ export default function LoginPage() {
           <div className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl px-7 pt-7 pb-8 flex flex-col gap-5 items-center transition-all duration-500">
             <Logo />
             <h2 className="text-2xl font-bold text-center text-indigo-700 mb-1">
-              Inventario Material Tico
+              Inventario Miviviendazn
             </h2>
             <p className="text-slate-700 text-center font-medium mb-4 mt-[-8px] text-sm">
               Sistema de inventario

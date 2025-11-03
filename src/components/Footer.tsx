@@ -4,7 +4,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="w-full py-3 text-xs flex flex-col items-center justify-center gap-2 select-none bg-transparent text-gray-900 dark:text-gray-100 transition-colors duration-300 mt-auto">
+    <footer className="w-full py-3 text-xs flex flex-col items-center justify-center gap-2 select-none bg-transparent text-gray-900 transition-colors duration-300 mt-auto">
       {/* Fila principal con logo y copyright */}
       <div className="flex items-center gap-2">
         {/* Logo KJAX */}
@@ -38,7 +38,7 @@ export function Footer() {
           <span className="font-medium">Contáctanos:</span>
           <a 
             href="tel:70268044" 
-            className="flex items-center gap-1.5 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            className="flex items-center gap-1.5 hover:text-blue-600 transition-colors"
             aria-label="Llamar al 70268044"
           >
             <Phone className="h-3 w-3" />
@@ -55,7 +55,7 @@ export function Footer() {
             href="https://www.facebook.com/profile.php?id=61578174399123" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors hover:scale-110 transition-transform"
+            className="hover:text-blue-600 transition-colors hover:scale-110 transform"
             aria-label="Facebook"
           >
             <Facebook className="h-3.5 w-3.5" />
@@ -64,7 +64,7 @@ export function Footer() {
             href="https://www.instagram.com/kjaxsystems/?igsh=NW10ZjVmbjhjcDht" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="hover:text-pink-600 dark:hover:text-pink-400 transition-colors hover:scale-110 transition-transform"
+            className="hover:text-pink-600 transition-colors hover:scale-110 transform"
             aria-label="Instagram"
           >
             <Instagram className="h-3.5 w-3.5" />

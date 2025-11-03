@@ -1,84 +1,41 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect } from 'react'
 
-type Theme = 'light' | 'dark'
+type Theme = 'light'
 
-interface ThemeContextType {
-  theme: Theme
-  toggleTheme: () => void
-  setTheme: (theme: Theme) => void
+type ThemeProviderProps = {
+  children: React.ReactNode
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
+type ThemeProviderState = {
+  theme: Theme
+}
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    // Verificar localStorage primero, luego preferencias del sistema
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('theme') as Theme
-      if (stored) return stored
-      
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    }
-    return 'light'
-  })
+const initialState: ThemeProviderState = {
+  theme: 'light',
+}
 
+const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
+
+export function ThemeProvider({ children }: ThemeProviderProps) {
   useEffect(() => {
+    // Forzar tema claro siempre
     const root = window.document.documentElement
-    
-    // Agregar clase de transición para animaciones suaves
-    root.style.setProperty('--theme-transition', 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)')
-    
-    // Aplicar el tema
-    root.classList.remove('light', 'dark')
-    root.classList.add(theme)
-    
-    // Guardar en localStorage
-    localStorage.setItem('theme', theme)
-    
-    // Aplicar transiciones a elementos específicos
-    document.body.style.transition = 'background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-    
-    // Agregar transiciones CSS globales
-    const style = document.createElement('style')
-    style.textContent = `
-      * {
-        transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-                    color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-                    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-      }
-      
-      .theme-transition {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-      }
-    `
-    
-    if (!document.getElementById('theme-transitions')) {
-      style.id = 'theme-transitions'
-      document.head.appendChild(style)
-    }
-    
-  }, [theme])
-
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme)
-  }
-
-  const toggleTheme = () => {
-    setThemeState(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
-  }
+    root.classList.remove('dark')
+    root.classList.add('light')
+  }, [])
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeProviderContext.Provider value={{ theme: 'light' }}>
       {children}
-    </ThemeContext.Provider>
+    </ThemeProviderContext.Provider>
   )
 }
 
-export function useTheme() {
-  const context = useContext(ThemeContext)
-  if (context === undefined) {
+export const useTheme = () => {
+  const context = useContext(ThemeProviderContext)
+
+  if (context === undefined)
     throw new Error('useTheme must be used within a ThemeProvider')
-  }
+
   return context
 }
