@@ -3,9 +3,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { cn } from "@/lib/utils"
 import { supabaseBrowser } from "@/lib/supabase/client"
 
-import { LayoutDashboard, Boxes, PackagePlus, PackageMinus, LogOut, History, AlignJustify, X, Users } from "lucide-react";
-import { Button } from "./ui/button";
-import type { User } from "@supabase/supabase-js";
+import { LayoutDashboard, Boxes, PackagePlus, PackageMinus, LogOut, History, AlignJustify, X, Users } from "lucide-react"
+import { Button } from "./ui/button"
+import type { User } from "@supabase/supabase-js"
 
 const links = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -14,7 +14,7 @@ const links = [
   { label: "Salida", href: "/exit", icon: PackageMinus },
   { label: "Historial", href: "/history", icon: History },
   { label: "Usuarios", href: "/users", icon: Users },
-];
+]
 
 export const Logo = () => (
   <div className="flex items-center justify-center w-full">
@@ -24,7 +24,7 @@ export const Logo = () => (
       className="h-12 max-w-[140px] object-contain"
     />
   </div>
-);
+)
 
 export function LuminaSidebar({ 
   isOpen, 
@@ -32,10 +32,10 @@ export function LuminaSidebar({
   onToggle,
   isDesktopView
 }: { 
-  isOpen: boolean; 
-  user: User | null;
-  onToggle: () => void;
-  isDesktopView: boolean;
+  isOpen: boolean
+  user: User | null
+  onToggle: () => void
+  isDesktopView: boolean
 }) {
   const location = useLocation()
   const navigate = useNavigate()
@@ -51,37 +51,43 @@ export function LuminaSidebar({
     }
   }
 
-  if (!user) return null;
+  if (!user) return null
+
+  // En móvil cerrado, no renderizar nada
+  if (!isDesktopView && !isOpen) return null
 
   return (
     <aside className={cn(
-      "sticky top-0 h-screen bg-gradient-to-b from-blue-900 to-blue-800 border-r border-blue-800 shadow-md overflow-hidden transition-all duration-300",
-      isOpen ? "w-30" : "w-16"
+      "h-screen bg-gradient-to-b from-blue-900 to-blue-800 border-r border-blue-800 shadow-md overflow-hidden transition-all duration-300",
+      isDesktopView ? "sticky top-0" : "fixed left-0 top-0 z-40",
+      isOpen ? "w-52" : "w-16"
     )}>
-      <div className={cn(
-        "flex flex-col h-full p-3",
-        !isDesktopView && !isOpen && "invisible"
-      )}>
+      <div className="flex flex-col h-full p-3">
         <div className={cn(
           "mb-6 flex items-center border-b border-blue-800 pb-3",
           isOpen ? "justify-between" : "justify-center"
         )}>
           {isOpen && <Logo />}
-          <button
-            onClick={onToggle}
-            className={cn(
-              "p-1.5 rounded-md text-gray-300 hover:bg-blue-800 hover:text-white hover:scale-105 transition-all duration-300 ease-in-out",
-              isOpen && "ml-auto"
-            )}
-            aria-label={isOpen ? "Colapsar menú" : "Expandir menú"}
-          >
-            {isOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <AlignJustify className="w-5 h-5" />
-            )}
-          </button>
+          
+          {/* Botón toggle solo visible en desktop */}
+          {isDesktopView && (
+            <button
+              onClick={onToggle}
+              className={cn(
+                "p-1.5 rounded-md text-gray-300 hover:bg-blue-800 hover:text-white hover:scale-105 transition-all duration-300 ease-in-out",
+                isOpen && "ml-auto"
+              )}
+              aria-label={isOpen ? "Colapsar menú" : "Expandir menú"}
+            >
+              {isOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <AlignJustify className="w-5 h-5" />
+              )}
+            </button>
+          )}
         </div>
+        
         <nav className="flex flex-col space-y-1.5">
           {links.map((link) => {
             const IsActive = location.pathname === link.href
@@ -91,7 +97,7 @@ export function LuminaSidebar({
                 key={link.label}
                 onClick={() => {
                   if (!isDesktopView && isOpen) {
-                    onToggle();
+                    onToggle()
                   }
                 }}
                 className={cn(
@@ -109,7 +115,9 @@ export function LuminaSidebar({
             )
           })}
         </nav>
+        
         <div className="flex-1" />
+        
         <div className="pt-3 border-t border-blue-800">
           <Button 
             variant="ghost" 
@@ -125,5 +133,5 @@ export function LuminaSidebar({
         </div>
       </div>
     </aside>
-  );
+  )
 }
